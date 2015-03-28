@@ -34,3 +34,4 @@ This document is available under the
 Creative Commons - Attribution - Non Commercial - NoDerivs License,
 see LICENSE
 
+The copyright itself resides with the AUTHORS.
