@@ -1,0 +1,47 @@
+#! /usr/bin/tclsh
+#
+# smttoasim - convert a SMT file to ASIM format, i.e.
+#
+# t,Value
+# ..,...
+#
+# See the ASIM manual for details
+#
+
+proc emit {t v} {
+  if {![string is double $v]} {
+    set v 0.0
+  }
+  puts "$t,$v"
+}
+
+set to 0
+puts "t,V"    
+set nr 0
+gets stdin l
+set t0 -1
+while {[gets stdin l] > 0} {
+  incr nr
+  if {$nr < 10} {
+    continue ;# skip the bad samples from SMT (PI tools :-...)
+  }
+  set s [split $l ,]
+  set v [lindex $s 2]
+  set t [lindex $s 3]
+  set t [string range $t 0 end-4] ;# remove ms
+      set t [clock scan $t]
+  if {$t0 == -1} {
+    set t0 $t
+  }	 
+  set tb [expr $t-$t0]
+  if {$tb < 0} {
+    puts stderr "Time travel #1 at $nr"
+    exit 101
+  }    
+  if {$tb < $to} {
+    puts stderr "Time travel #2 at $nr $tb < $to"
+    exit 102
+  }
+  emit $tb $v
+  set to $tb
+}
