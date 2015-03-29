@@ -1,0 +1,28 @@
+%
+% main.tex - paper for skycamera nowcasting comparision report
+%
+
+%\documentclass[technote,12pt,onecolumn,final,a4paper]{IEEEtran}
+\documentclass[technote,twocolumn,9pt,final,a4paper]{IEEEtran}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{comment}
+\usepackage{fancyvrb}
+\usepackage{relsize}
+\newenvironment{code}
+{\Verbatim[fontfamily=courier,%
+fontsize=\relsize{-3},%
+% disabled numbers for now since they take up space
+%numbers=right,stepnumber=5,%
+firstnumber=\the\inputlineno]}%
+{\endVerbatim}
+\VerbatimFootnotes
+\DefineShortVerb{\+} % use +Verbtext+ for verbatim names, etc.
+\usepackage{SIunits}
+\begin{document}
+\input{main.lhs}
+\end{document}
+
